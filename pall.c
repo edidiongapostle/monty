@@ -1,26 +1,23 @@
 #include "monty.h"
 
 /**
- * f_pall - Prints the stack
- * @head: Stack head
- * @line_number: Line number (not used)
+ * pall - prints all the elements on the stack
+ * @stack: the given head pointer
+ * @line_number: The line on which the error occurred
  *
- * Return: No return value
  */
-
-void f_pall(stack_t **head, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number)
 {
-	stack_t *current_node;
-	(void)line_number;
+	stack_t *start = NULL;
+	(void) line_number;
 
-	current_node = *head;
-
-	if (current_node == NULL)
-		return;
-
-	while (current_node)
+	if (*stack)
 	{
-		printf("%d\n", current_node->n);
-		current_node = current_node->next;
+		start = *stack;
+		while (start != NULL)
+		{
+			printf("%d\n", start->n);
+			start = start->next;
+		}
 	}
 }

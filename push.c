@@ -1,48 +1,23 @@
 #include "monty.h"
 
 /**
- * f_push - Add node to the stack
- * @head: Stack head
- * @line_number: line number
+ * pall - prints all the elements on the stack
+ * @stack: the given head pointer
+ * @line_number: The line on which the error occurred
  *
- * Return: No return value
  */
-
-void f_push(stack_t **head, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number)
 {
-	int num, j = 0, flag = 0;
+	stack_t *start = NULL;
+	(void) line_number;
 
-	if (bus.arg)
+	if (*stack)
 	{
-		if (bus.arg[0] == '-')
-			j++;
-		for (; bus.arg[j] != '\0'; j++)
+		start = *stack;
+		while (start != NULL)
 		{
-			if (bus.arg[j] > '9' || bus.arg[j] < '0')
-				flag = 1;
-		}
-		if (flag == 1)
-		{
-			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			fclose(bus.file);
-			free(bus.content);
-			free_stack(*head);
-			exit(EXIT_FAILURE);
+			printf("%d\n", start->n);
+			start = start->next;
 		}
 	}
-	else
-	{
-		fprintf(stderr, "L%d: usage: push integer\n", line_number);
-		fclose(bus.file);
-		free(bus.content);
-		free_stack(*head);
-		exit(EXIT_FAILURE);
-	}
-
-	num = atoi(bus.arg);
-
-	if (bus.lifi == 0)
-		addnode(head, num);
-	else
-		addqueue(head, num);
 }

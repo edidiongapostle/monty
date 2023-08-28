@@ -1,66 +1,63 @@
 #include "monty.h"
 
 /**
- * push - adds a new node at the beginning of the stack
- * @stack: the given head pointer
- * @param: the data to add
- *
+ * stack_push - adds a new node at the beginning of the stack
+ * @head: the given head pointer
+ * @data: the data to add
  */
-
-void push(stack_t **stack, unsigned int param)
+void stack_push(stack_t **head, unsigned int data)
 {
-	stack_t *new_node = NULL;
+    stack_t *new_item = NULL;
 
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-		handle_error(ERR_BAD_MALL, NULL, 0, NULL);
+    new_item = malloc(sizeof(stack_t));
+    if (new_item == NULL)
+        handle_error(ERR_BAD_MALL, NULL, 0, NULL);
 
-	new_node->n = param;
+    new_item->n = data;
 
-	if (*stack)
-	{
-		new_node->next = *stack;
-		new_node->prev = (*stack)->prev;
-		(*stack)->prev = new_node;
-		*stack = new_node;
-		return;
-	}
+    if (*head)
+    {
+        new_item->next = *head;
+        new_item->prev = (*head)->prev;
+        (*head)->prev = new_item;
+        *head = new_item;
+        return;
+    }
 
-	new_node->next = *stack;
-	new_node->prev = NULL;
-	*stack = new_node;
+    new_item->next = *head;
+    new_item->prev = NULL;
+    *head = new_item;
 }
 
 /**
- * push_queue - adds a new node to the end of the stack
- * @stack: the given head pointer
- * @param: the data to add
- *
+ * queue_push - adds a new node to the end of the stack
+ * @head: the given head pointer
+ * @data: the data to add
  */
-
-void push_queue(stack_t **stack, unsigned int param)
+void queue_push(stack_t **head, unsigned int data)
 {
-	stack_t *new_node = NULL, *current_node = NULL;
+    stack_t *new_item = NULL, *current_item = NULL;
 
-	new_node = malloc(sizeof(stack_t));
-	if (new_node == NULL)
-		handle_error(ERR_BAD_MALL, NULL, 0, NULL);
+    new_item = malloc(sizeof(stack_t));
+    if (new_item == NULL)
+        handle_error(ERR_BAD_MALL, NULL, 0, NULL);
 
-	new_node->n = param;
+    new_item->n = data;
 
-	if (*stack)
-	{
-		current_node = *stack;
-		while (current_node->next != NULL)
-			current_node = current_node->next;
+    if (*head)
+    {
+        current_item = *head;
+        while (current_item->next != NULL)
+            current_item = current_item->next;
 
-		new_node->next = NULL;
-		new_node->prev = current_node;
-		current_node->next = new_node;
-		return;
-	}
+        new_item->next = NULL;
+        new_item->prev = current_item;
+        current_item->next = new_item;
+        return;
+    }
 
-	new_node->next = *stack;
-	new_node->prev = NULL;
-	*stack = new_node;
+    new_item->next = *head;
+    new_item->prev = NULL;
+    *head = new_item;
 }
+
